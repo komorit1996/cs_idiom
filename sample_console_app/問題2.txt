@@ -1,0 +1,114 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+using System.Runtime.CompilerServices;
+
+namespace SampleConsoleApp
+{
+internal class Program
+{
+static void Main(string[] args)
+{
+    //
+    var Abbr = new Abbreviations();
+    /*
+    Console.WriteLine();
+    //
+    Console.WriteLine(Abbr.CountDict);
+    //
+    bool TorF = Abbr.removeElement("PKO") ? true : false;
+    Console.WriteLine(TorF);
+    // 7-3
+    if (Abbr.removeElement("PKO"))
+    {
+        Console.WriteLine(Abbr.CountDict);
+    }
+    else
+    {
+        Console.WriteLine("削除失敗");
+    }             
+    */
+
+    // 7-4 3文字だけ表示する
+    Abbr.threeChar();
+            
+}
+
+}
+
+class Abbreviations
+{
+// 辞書を複製しておく
+private Dictionary<string, string> _dict = new Dictionary<string, string>();
+
+public Abbreviations()
+{
+    var lines = File.ReadAllLines("Abbreviations.txt");
+    _dict = lines.Select(line => line.Split("=")).ToDictionary(x => x[0], x => x[1]);
+}
+
+// add element
+public void Add(string abbr, string japanese)
+{
+    _dict[abbr] = japanese;
+}
+
+// インデクサ　配列のようにアクセスを行うため
+public string this[string abbr]
+{
+    get
+    {
+        return _dict.ContainsKey(abbr) ? _dict[abbr] : null;
+    }
+}
+
+// japanese to abbr
+public string ToAbbr(string Japanese)
+{
+    return _dict.FirstOrDefault(d => d.Value == Japanese).Key;
+}
+
+// 日本語の位置を引数に与え、それの要素をとる
+public IEnumerable<KeyValuePair<string, string>> FindAll(string SubStr)
+{
+    foreach (var item in _dict)
+    {
+        if (item.Value.Contains(SubStr))
+        {
+            yield return item; // item がコレクションとして機能するようになる
+        }
+    }
+}
+
+// 7-4
+public void threeChar()
+{
+    var threeChar = _dict.Where(d => d.Key.Length <= 3);
+    foreach (var item in threeChar) { 
+    Console.WriteLine($"{item.Key}={item.Value}");
+    }
+}
+
+// 7-1
+public int CountDict
+{
+    get { return _dict.Count; }
+}
+
+// 7-2 DEL
+public bool removeElement(string Abbr)
+{
+    return _dict.Remove(Abbr);
+}
+// 7-4
+
+        
+}
+}

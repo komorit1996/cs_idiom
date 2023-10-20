@@ -1,0 +1,15 @@
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\bin\Release\net6.0\sample_console_app.exe
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\bin\Release\net6.0\sample_console_app.deps.json
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\bin\Release\net6.0\sample_console_app.runtimeconfig.json
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\bin\Release\net6.0\sample_console_app.dll
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\bin\Release\net6.0\sample_console_app.pdb
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\obj\Release\net6.0\sample_console_app.csproj.AssemblyReference.cache
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\obj\Release\net6.0\sample_console_app.GeneratedMSBuildEditorConfig.editorconfig
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\obj\Release\net6.0\sample_console_app.AssemblyInfoInputs.cache
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\obj\Release\net6.0\sample_console_app.AssemblyInfo.cs
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\obj\Release\net6.0\sample_console_app.csproj.CoreCompileInputs.cache
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\obj\Release\net6.0\sample_console_app.dll
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\obj\Release\net6.0\refint\sample_console_app.dll
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\obj\Release\net6.0\sample_console_app.pdb
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\obj\Release\net6.0\sample_console_app.genruntimeconfig.cache
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\obj\Release\net6.0\ref\sample_console_app.dll

@@ -1,0 +1,78 @@
+﻿/*
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+
+namespace SampleConsoleApp
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            if (File.Exists(@"./sample.txt"))
+            {
+                var lines = File.ReadAllLines(@"./sample.txt");
+                var we = new WordExtractor(lines);
+                foreach (var line in we.Extract())
+                {
+                    Console.WriteLine(line);
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Can not found file...");
+
+            }
+        }
+        class WordExtractor
+        {
+            private string[] _lines;
+
+            // constracrtor
+            public WordExtractor(string[] lines)
+            {
+                _lines = lines;
+            }
+
+            // 単語を重複なくアルファベット順にする
+            public IEnumerable<string> Extract()
+            {
+                var hash = new HashSet<string>();
+                foreach (var line in _lines)
+                {
+                    var words = GetWords(line);
+                    foreach (var word in words)
+                    {
+                        if (word.Length >= 10)
+                        {
+                            hash.Add(word.ToLower());
+                        }
+                    }
+                }
+                return hash.OrderBy(s => s);
+            }
+
+            private char[] _separators = @" !?"",.".ToCharArray();
+
+            // このメソッドは、与えられた文字列から単語を抽出します。その際、指定された区切り文字に基づいて単語を切り分け、特定の条件に従って加工します。
+            private IEnumerable<string> GetWords(string line)
+            {
+                var items = line.Split(_separators, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var item in items)
+                {
+                    var index = item.IndexOf("");
+                    var word = index <= 0 ? item : item.Substring(0, index);
+                    // only alphabet
+                    if (word.ToLower().All(c => 'a' <= c && c <= 'z')) ;
+                    yield return word;
+                }
+            }
+        }
+    }
+}
+*/

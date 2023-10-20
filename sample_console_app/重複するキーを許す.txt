@@ -1,0 +1,45 @@
+﻿/*
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+
+namespace SampleConsoleApp
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            var dict = new Dictionary<string, List<string>>()
+            {
+                { "PC", new List<string>() {"パソコン","プログラム カウンタ" } },
+                { "CD", new List<string>() {"コンパクトディスク","カー ディスペンサー" } },
+            };
+
+            var key = "EC";
+            var val = "電子商取引";
+            if (dict.ContainsKey(key))
+            {
+                dict[key].Add(val);
+            }
+            else // not register
+            {
+                dict[key] = new List<string> { val };
+            }
+            //
+            foreach (var item in dict)
+            {
+                foreach (var item2 in item.Value)
+                {
+                    Console.WriteLine($"{item.Key} = {item2}");
+                }
+            }
+        }
+    }
+}
+
+
+*/

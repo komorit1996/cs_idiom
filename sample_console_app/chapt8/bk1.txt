@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
+
+namespace SampleConsoleApp
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            var date = DateTime.Now;
+            Console.WriteLine(date.DayOfWeek);
+            // 
+            DateTime dt1;
+            if(DateTime.TryParse("2023/1/1",out dt1))
+            {
+                Console.WriteLine(dt1);
+            };
+
+            DateTime d2;
+            DateTime.TryParse("2023/1/1" , out d2);
+            Console.WriteLine($"{d2.Year},{d2.Month,2},{d2.Day,2}");            
+            // 
+            var culture = new CultureInfo("ja-JP");
+            culture.DateTimeFormat.Calendar = new JapaneseCalendar();
+            var str = d2.ToString("ggyy年mm月dd日",culture);
+            Console.WriteLine(str);
+            // 
+            var now2 = DateTime.Now;
+            var ts2 = new TimeSpan(1, 20, 0);
+            Console.WriteLine(now2 + ts2);
+            // last day
+            var today = DateTime.Now;
+            int dat = DateTime.DaysInMonth(today.Year,today.Month);
+            Console.WriteLine(dat);
+            //
+            int dayOfYear = today.DayOfYear;
+            Console.WriteLine(dayOfYear);
+            // 第何週か求める
+            Console.WriteLine(NthWeek(today));
+            // 指定した月の第n回目のX曜日の日付を求める
+            Console.WriteLine(DayOfNthWeek(now2.Year, now2.Month, now2.DayOfWeek, 4));
+            Console.WriteLine(DayOfNthWeek2(now2.Year, now2.Month, now2.DayOfWeek, 4));
+
+        }
+
+        public static int NthWeek(DateTime date)
+        {
+            // 第何週か求める
+            var firstDay = new DateTime(date.Year, date.Month, date.Day);
+            var firstDayOfWeek = (int)(firstDay.DayOfWeek);
+            return (date.Day + firstDayOfWeek - 1) / 7 - 1;
+        }
+
+        public static DateTime DayOfNthWeek(int Year,int Month,DayOfWeek dayOfweek,int nth)
+        {
+            var firstDay = Enumerable.Range(1, 7).Select(d => new DateTime(Year, Month, d)).First(d => d.DayOfWeek == dayOfweek).Day; // 最初のx曜日を求めておく
+            var day = firstDay + (nth - 1) * 7;
+            return new DateTime(Year, Month, day);
+        }
+        public static DateTime DayOfNthWeek2(int year, int month, DayOfWeek dayOfWeek, int nth)
+        {
+            var firstDay = new DateTime(year, month, 1);
+            int diff = dayOfWeek - firstDay.DayOfWeek;
+            if (diff < 0) diff += 7;
+            var result = firstDay.AddDays(diff + (nth - 1) * 7);
+            return result;
+        }
+
+    }
+}

@@ -1,0 +1,84 @@
+﻿/*
+
+var Abbr = new Abbreviations();
+Abbr.Add("BBB", "BBBBBBBB");
+
+// indexer
+var names = new[] { "WHO", "CIA", "FBI" };
+foreach (var name in names)
+{
+    var fullname = Abbr[name];
+    if (fullname == null)
+    {
+        Console.WriteLine($"Can not found {name}.");
+    } else
+    {
+        Console.WriteLine($"{name} is {fullname}");
+    }
+}
+Console.WriteLine();
+// 
+var Japanese = "世界保健機関";
+var abbreviations = Abbr.ToAbbr(Japanese);
+if (abbreviations == null)
+{
+    Console.WriteLine($"Can not found {abbreviations}.");
+}
+else
+{
+    Console.WriteLine($"{Japanese} is {abbreviations}");
+}
+Console.WriteLine();
+
+// find all
+foreach (var item in Abbr.FindAll("国"))
+{
+    Console.WriteLine(item.Value);
+}
+}
+
+class Abbreviations
+{
+private Dictionary<string, string> _dict = new Dictionary<string, string>();
+
+public Abbreviations()
+{
+    var lines = File.ReadAllLines("Abbreviations.txt");
+    _dict = lines.Select(line => line.Split("=")).Distinct().ToDictionary(x => x[0], x => x[1]);
+
+}
+
+// add element
+public void Add(string abbr, string japanese)
+{
+    _dict[abbr] = japanese;
+}
+
+// インデクサ　配列のようにアクセスを行うため
+public string this[string abbr]
+{
+    get
+    {
+        return _dict.ContainsKey(abbr) ? _dict[abbr] : null;
+    }
+}
+
+// japanese to abbr
+public string ToAbbr(string Japanese)
+{
+    return _dict.FirstOrDefault(d => d.Value == Japanese).Key;
+}
+
+// 日本語の位置を引数に与え、それの要素をとる
+public IEnumerable<KeyValuePair<string, string>> FindAll(string SubStr)
+{
+    foreach (var item in _dict)
+    {
+        if (item.Value.Contains(SubStr))
+        {
+            yield return item; // item がコレクションとして機能するようになる
+        }
+    }
+}
+
+*/

@@ -1,0 +1,78 @@
+1: using System;
+2: using System.IO;
+3: using System.Text;
+4: 
+5: namespace SampleConsoleApp
+6: {
+7:     internal class Program
+8:     {
+9:         static void Main(string[] args)
+10:         {
+11:             var FilePath = @"./sample.txt";
+12:             if (File.Exists(FilePath))
+13:             {
+14:                 //
+15:                 /*
+16:                 using (var reader = new StreamReader(FilePath, Encoding.UTF8))
+17:                 {
+18:                     while (!reader.EndOfStream) {
+19:                         var line = reader.ReadLine();
+20:                         Console.WriteLine(line);
+21:                     }
+22:                 }                 
+23:                 */
+24: 
+25:                 //
+26:                 /*
+27:                 var lines = File.ReadAllLines(FilePath,Encoding.UTF8);
+28:                 foreach (var item in lines)
+29:                 {
+30:                     Console.WriteLine(item);
+31:                 }
+32:                 Console.WriteLine();
+33:                 */
+34: 
+35:                 //
+36:                 var lines2 = File.ReadAllLines(FilePath,Encoding.UTF8);
+37: 
+38:                 var lines22 = lines2.Where(a => !String.IsNullOrWhiteSpace(a));
+39:                 Console.WriteLine(lines22);
+40:                 
+41:                 // 
+42: 
+43: 
+44:             }
+45:             else
+46:             {
+47:                 Console.WriteLine("ファイルが見つかりません");
+48:             }
+49:         }
+50:     }
+51:     class Test
+52:     {
+53:         public static void Main()
+54:         {
+55:             try
+56:             {
+57:                 // Create an instance of StreamReader to read from a file.
+58:                 // The using statement also closes the StreamReader.
+59:                 using (StreamReader sr = new StreamReader("TestFile.txt"))
+60:                 {
+61:                     string line;
+62:                     // Read and display lines from the file until the end of
+63:                     // the file is reached.
+64:                     while ((line = sr.ReadLine()) != null)
+65:                     {
+66:                         Console.WriteLine(line);
+67:                     }
+68:                 }
+69:             }
+70:             catch (Exception e)
+71:             {
+72:                 // Let the user know what went wrong.
+73:                 Console.WriteLine("The file could not be read:");
+74:                 Console.WriteLine(e.Message);
+75:             }
+76:         }
+77:     }
+78: }

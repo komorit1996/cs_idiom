@@ -1,0 +1,32 @@
+﻿using System;
+
+namespace SampleConsoleApp
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            DateTime dt1 = DateTime.Now;
+
+            var tw = new TimeWatch();
+            tw.Start();
+            TimeSpan duration = tw.Stop();
+            Console.WriteLine($" 処理 時間 は{duration.TotalSeconds} 秒 でし た");
+        }
+
+        class TimeWatch
+        {
+            private DateTime _startTime;
+
+            public void Start()
+            {
+                _startTime = DateTime.Now;
+            }
+
+            public TimeSpan Stop()
+            {
+                return DateTime.Now - _startTime;
+            }
+        }
+    }
+}

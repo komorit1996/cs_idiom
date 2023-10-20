@@ -1,0 +1,56 @@
+﻿    /*
+    var flowerDict = new Dictionary<string, int>() { { "sunflower", 400 }, { "pansy", 300 }, { "tulip", 350 }, { "rose", 500 }, { "dahlia", 450 }, };
+
+    flowerDict["violet"] = 300;
+
+    foreach (var item in flowerDict)
+    {
+        Console.WriteLine($"{item.Key},{item.Value}");
+    }
+    // 
+    var avg = flowerDict.Average(a => a.Value);
+    Console.WriteLine(avg);
+    // 条件に合致したデータのみ辞書に変換
+    var newDict = flowerDict.Where(a => a.Value == 300).ToDictionary(flower => flower.Key, flower => flower.Value);
+    foreach (var item in newDict)
+    {
+        Console.WriteLine($"{item.Key} = {item.Value}");
+    }             
+    */
+
+    // class をキーにする
+    var dict = new Dictionary<MonthDay, string>
+    {
+        { new MonthDay(3,5),"サンゴの日"},
+        { new MonthDay(8,4),"橋の日"},
+        { new MonthDay(10,3),"登山の日" }
+    };
+    var md = new MonthDay(8, 4);
+    var s = dict[md];
+    Console.WriteLine(s);
+}
+
+class MonthDay
+{
+    public int Day { get; private set; }
+    public int Month { get; private set; }
+    public MonthDay(int Month, int Day)
+    {
+        this.Month = Month;
+        this.Day = Day;
+    }
+
+    // キーの比較をする必要がある
+    public override bool Equals(object? obj)
+    {
+        var other = obj as MonthDay;
+        if (other == null) throw new AggregateException();
+        return this.Day == other.Day && this.Month == other.Month;
+    }
+
+    public override int GetHashCode() // hash値でキーを定義する
+    {
+        return Month.GetHashCode() * 31 + Day.GetHashCode(); // 31 は素数で、hash値をばらけさせる効果がある
+    }
+
+}

@@ -1,0 +1,37 @@
+﻿/*
+var books = new List<Book> {
+    new Book { Title = "こころ", Price = 400, Pages = 378 },
+    new Book { Title = "人間失格", Price = 281, Pages = 212 },
+    new Book { Title = "伊豆の踊子", Price = 389, Pages = 201 },
+    new Book { Title = "若草物語", Price = 637, Pages = 464 },
+    new Book { Title = "銀河鉄道の夜", Price = 411, Pages = 276 },
+    new Book { Title = "二都物語", Price = 961, Pages = 666 },
+    new Book { Title = "遠野物語", Price = 514, Pages = 268 }
+};
+
+/*
+var nums = Enumerable.Repeat(-1, 20).ToList();
+var strs = Enumerable.Repeat("(unknown)", 12).ToArray();
+foreach (var num in nums)
+{
+    Console.WriteLine(num);
+}
+foreach (var str in strs)
+{
+    Console.WriteLine(str);
+}
+
+var avg = books.Average(x => x.Price);
+
+var titleContain = books.Count(x => x.Title.Contains("物語"));
+Console.WriteLine(titleContain.ToString());
+*/
+
+var numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, };
+var newList = numbers.Where(n => n != 5);
+foreach (var item in newList)
+{
+    Console.WriteLine(item);
+}
+
+*/
