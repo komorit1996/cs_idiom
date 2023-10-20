@@ -19,3 +19,8 @@
 \\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\bin\Debug\net6.0\sample.txt
 \\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\bin\Debug\net6.0\Abbreviations.txt
 \\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\bin\Debug\net6.0\sampleOutput.txt
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\bin\Debug\net6.0\chapt10\bk1.txt
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\bin\Debug\net6.0\sample.html
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\bin\Debug\net6.0\sample.xml
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\bin\Debug\net6.0\sports.xml
+\\wsl.localhost\Ubuntu\home\komorit1996\git\cs_idiom\sample_console_app\bin\Debug\net6.0\nandoku.xml

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ABBR>
+  <word test="test2">
+    <kanji>鬼灯</kanji>
+    <yomi>ほおずき</yomi>
+  </word>
+  <word test="test2">
+    <kanji>暖簾</kanji>
+    <yomi>のれん</yomi>
+  </word>
+  <word test="test2">
+    <kanji>杜撰</kanji>
+    <yomi>ずさん</yomi>
+  </word>
+  <word test="test2">
+    <kanji>坩堝</kanji>
+    <yomi>るつぼ</yomi>
+  </word>
+</ABBR>

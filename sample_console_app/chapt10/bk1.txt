@@ -1,0 +1,207 @@
+﻿using Microsoft.VisualBasic;
+using System;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Linq;
+
+namespace SampleConsoleApp
+{
+    // https://learn.microsoft.com/ja-jp/dotnet/standard/base-types/regular-expressions
+    internal class Program
+    {
+        static void Main(string[] args
+        {
+                    /*
+
+            // toi 6
+            var text6 = "しるし しんぶんし きたのたき きもの いろしろい トマト ヨクナクヨ";
+            var pt = @"\b(\w)(\w)\w\2\1\b";
+            var mt = Regex.Matches(text6, pt);
+            foreach (var m in mt) { Console.WriteLine(m); }
+            // toi 5
+            var fp = @"./sample.html";
+            var txtFile = File.ReadLines(fp);
+            var pt = @"<(/?)([A-Z][A-Z0-9]*)(.*?)>" ; // HTML　や XML のタグにマッチする
+            var reg = new Regex(pt);
+            var newText = txtFile.Select(t => reg.Replace(t, t.ToLower()));
+            foreach (var t in newText) { Console.WriteLine(t); }
+
+            // var newTxt = txtFile.Select(t => Regex.Replace(t, pt, @"version=""5.0"""));
+            // File.WriteAllLines("./ver50.txt", newTxt);
+
+            // toi 4
+            var fp = @"./sample.txt";
+            var txtFile = File.ReadLines(fp);
+            // var pt = @"(version=""\d.\d"")"; // version と合致する部分を特定する
+            // var pt = @"(version=""[^""]*"")";
+            var pt = @"(<version="")[^""]*("".*>)";
+            var newTxt = txtFile.Select(t => Regex.Replace(t, pt, @"version=""5.0"""));
+            File.WriteAllLines("./ver50.txt", newTxt);
+            
+            // toi 3
+            var texts = new[] { "Time is money.", "What time is it?", "It will take time.", "We reorganized the timetable.", };
+            var pt = @"\btime\b";
+            var reg = new Regex(pt,RegexOptions.IgnoreCase);
+            foreach (var text in texts)
+            {
+                var mt = reg.Match(text);
+                Console.WriteLine(mt.Index);
+            }
+            foreach (var line in texts)
+            {
+                var matches = Regex.Matches(line, @"\btime\b", RegexOptions.IgnoreCase);
+                foreach (Match m in matches)
+                {
+                    Console.WriteLine("{0}: {1}", line, m.Index);
+                }
+            }
+            // toi 1
+            var text1 = "090-0120-0000";
+            // var pt = @"^0[789]0-\d{4}-\d{4}$";
+            var pt = @"^0[789]0-\d{4}-\d{4}$";
+            var mt = Regex.Match(text1, pt);
+            if(mt.Success) Console.WriteLine("ok");            
+            */
+
+            // toi 2
+            /*
+            var fp = @"./sample.txt";
+            var txtFile = File.ReadLines(fp);
+            // var pt = @"\b[0-9]{3,}\b"; // 3文字以上の部分文字列で数字
+            var pt = @"\d{3,}"; // 3文字以上の部分文字列で数字
+            var reg = new Regex(pt);
+            foreach (var line in txtFile)
+            {
+                var mc = reg.Matches(line);
+                foreach (Match m in mc)
+                {
+                    Console.WriteLine(m.Value);
+                }
+            }
+            */
+
+
+            var text = "しるし こもじ しんぶんし きもの トマト pops push pop";
+            var pt = @"\b(\w)\w\1\b"; // 長さが３で、両端が同じ文字を表示する
+            var rg = Regex.Matches(text, pt);
+            foreach (var r in rg) { Console.WriteLine(r); }
+
+            var txt = "僕僕はパンのミミをちぎり、ペットのももに分け与えた";
+            var pt = @"(\w)\1";
+            var mt = Regex.Matches(txt, pt);
+            foreach (var m in mt)
+            {
+                Console.WriteLine(m);
+            }
+
+            ///// replace
+            var text = "<person><name>栗原 利伸</name><age>22</age></person>";
+            var pt = @"<(\w+?)>"; // \w 任意の文字、 +? 最小の繰り返し、
+            var matches = Regex.Matches(text, pt);
+            foreach (Match match in matches)
+            {
+                Console.WriteLine(match.Groups[1].Value);
+            }
+            */
+
+            var text = "C#の学習を少しずつ進めていこう";
+            var pattern = @"少しずつ|すこしづつ|すこしずつ|C#";
+            var replace = Regex.Replace(text, pattern, "少しずつ");
+            Console.WriteLine(replace);
+
+            string text = "foo.htm bar.html baz.htm";
+            var pattern = @"\.(htm)\b";
+            var replace = Regex.Replace(text, pattern, ".html");
+            Console.WriteLine(replace);
+
+            string text = "1024バイト、8バイト文字、バイト、キロバイト";
+            var pattern = @"(\b+)+バイト";
+            var replace = Regex.Replace(text, pattern, "$1 byte"); // $1 がグループ化の１つ目と対応する
+            Console.WriteLine(replace);
+
+            string text = "1234567890123456";
+            var pattern = @"(\d{4})(\d{4})(\d{4})(\d{4})";
+            var replace = Regex.Replace(text, pattern, "$1-$2-$3-$4"); // $1 がグループ化の１つ目と対応する
+            Console.WriteLine(replace);
+            
+            // split
+            string text = "Word,Excel,PowerPoint, Outlook,OneNote";
+            var pattern = @"\s*,\s*";
+            var replace = Regex.Split(text, pattern); 
+            foreach (var replaceItem in replace) { Console.WriteLine(replaceItem); }
+
+            var text = "a123456 b123 Z12345 AX98765";
+            var pt = @"\b[a-zA-Z][0-9]{5,}\b"; // ５文字以上連続する
+            var match = Regex.Matches(text, pt);
+            foreach (Match item in match) { Console.WriteLine(item); }
+            
+            var text = "シーズン、 ゴールド、 シーソー、 ゴールデン などと一致します。スウェーデンやノートなどとは一致しません";
+            var pt = @"(\b|[^\p{IsKatakana}])(\p{IsKatakana}ー\p{IsKatakana}{2,3})(\b|[^\p{IsKatakana}])";
+            // var p2 = @"(\b|[^\p{IsKatakana}])(\p{IsKatakana}ー\p{IsKatakana}{2,3})(\b|[^\p{IsKatakana}])";
+
+            var mat = Regex.Matches(text, pt);
+            foreach (var m in mat)
+            {
+                Console.WriteLine(m);
+            }
+
+            var text2 = "Word,Excel,PowerPoint, Outlook,OneNote";
+            var pattern = @"\s*,\s*";
+            var replace = Regex.Replace(text2, pattern, ",");
+            Console.WriteLine(replace);
+
+            ///// Match
+            var text = "private List<string> results = new List<string>(); List<string>";
+            var text2 = "using System.Text.RegularExpressions;";
+            string text3 = "C# には、《値型》と《参照型》の2つの型が存在します";
+
+            // var reg = new Regex(@"List<\w+\>");
+            // var reg = new Regex(@"\b[a-z]+\b");
+            // var reg = new Regex(@"《([^《》]+)》"); // match.Groups[1].Value
+
+            string text4 = "Word\n Excel\n PowerPoint\n Outlook\n OneNote\n";
+            var reg = @"^\s*[a-zA-Z]{5,7}";
+            var matches = Regex.Matches(text4, reg, RegexOptions.Multiline).Cast<Match>();
+            foreach (Match match in matches)
+            {
+                Console.WriteLine($"{match.Index},{match.Value.Trim()}");
+            }
+
+            // matches.Select(n => n.Value).ToList().ForEach(Console.WriteLine);
+            // foreach (Match match in matches) { Console.WriteLine(match); }
+            // 数値のみ取り出す
+            var strings = new[] { "13000", "-50.6", "0.123", "+180.00", "10.2.5", "320-0851", "123", "$1200", "500円", };
+            var reg = new Regex(@"^[-+]?(\d+)(\.\d+)?$");
+            foreach (var s in strings)
+            {
+                var match = reg.Match(s);
+                Console.WriteLine(match);
+            }
+
+            var strings = new[] { "Microsoft Windows", "Windows Server", "Windows", };
+            var regex = new Regex(@"^(W|w)indows$");
+            var count = strings.Count(c => regex.IsMatch(c));
+            Console.WriteLine(count);
+            //
+            bool isMatch = Regex.IsMatch(text,@"List<\w+>");
+            if (isMatch)
+            {
+                Console.WriteLine(text);
+            } else { Console.WriteLine("Can not found."); }
+
+            var regex = new Regex(@"List<\w+>");
+            bool isMatch2 = regex.IsMatch(text);
+            if (isMatch2) { Console.WriteLine("mathc"); }
+
+            //
+            bool isMatch3 = Regex.IsMatch(text2,@"^using");
+            if(isMatch3) { Console.WriteLine("Match!"); }
+
+            //
+            bool isMathc4 = Regex.IsMatch(text2, @"ons;$");
+            if (isMathc4) { Console.WriteLine("ok"); }
+            
+        }
+    }
+}

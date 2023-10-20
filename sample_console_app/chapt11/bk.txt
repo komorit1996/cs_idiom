@@ -1,0 +1,111 @@
+﻿/*
+// foreach (var item in xmlRootDoc) { Console.WriteLine(item.Value); }
+
+// no1
+// string fp = "./sports.xml";
+string nandoku = "./nandoku.xml";
+var xdoc = XDocument.Load(nandoku);
+var xmlRootDoc = xdoc.Root.Elements();
+
+foreach ( var x in xmlRootDoc )
+{
+    x.SetAttributeValue("test", "test2");                
+    Console.WriteLine(x.Value);                
+}
+// var root = new XElement("difficultkanji",xmlRootDoc.Select(s => new XElement))
+// var xd = new XDocument(root);
+
+var words = xdoc.Root.Elements().Select(s => new XElement("word",
+    new XAttribute("kanji", s.Element("kanji").Value),
+    new XAttribute("yomi", s.Element("yomi").Value)
+    ));
+var root = new XElement("difficultkanji", words);
+root.Save("./newnandoku.xml");
+
+// no2
+var x2 = xdoc.Root.Elements().OrderBy(a => (a.Element("firstplayed").Value));
+// foreach (var item in x2) { Console.WriteLine(item.Element("name")); }
+// no3
+var maxTeamMembersSport = xdoc.Root.Elements().OrderByDescending(a => {
+    int.TryParse(a.Element("teammembers")?.Value, out int result);
+    return result;
+}).First();
+
+///// 結合 /////
+var sportName = maxTeamMembersSport.Element("name")?.Value;
+Console.WriteLine($"The sport with the most team members is {sportName}. {maxTeamMembersSport.Element("name")}");
+
+// no4
+// ballsport
+XElement soccer = new XElement("ballsport",
+    new XElement("name", "サッカー"),
+    new XElement("teammembers", 11),
+    new XElement("firstplayed", 1867)
+    );
+
+// soccer.Add(xdoc.Element("ballspots"));
+xdoc.Root.Add(soccer);
+foreach (var item in xmlRootDoc) { Console.WriteLine(item.Value); }
+
+
+*/
+
+
+    /*
+    string xmlFile = "./sample.xml";
+    var xdoc = XDocument.Load(xmlFile);
+
+    var docks = XDocument.Load("./abbrxml.xml");
+    var pairs = docks.Root.Elements().Select(x => new { key = x.Attribute("abbr").Value, value = x.Attribute("japanese").Value });
+    var dict = pairs.ToDictionary(d => d.key, d => d.value);
+    foreach (var item in dict)
+    {
+        Console.WriteLine($" val = {item.Value}, key = {item.Key}");
+    }
+
+    var xelements = xdoc.Root.Elements()
+        .Select(x => new
+        {
+            Name = (string)x.Element("name"),
+            Birth = (DateTime)x.Element("birth"),
+            Death = (DateTime)x.Element("death")
+        });
+
+    var dict = new Dictionary<string, object>()
+    {
+        ["IAEA"] = "国際原子力機関",
+        ["IMF"] = "国際通貨基金",
+        ["ISO"] = "いそ"
+    };
+
+    var query = dict.Select(a => new XElement("words",
+            new XAttribute("abbr",a.Key),
+            new XAttribute("japanese",a.Value)
+        ));
+    var root = new XElement("ABBR", query);
+    root.Save("./abbrxml.xml");             
+    */
+
+    // foreach (var xelement in xelements) {
+    // Console.WriteLine($"{xelement.Name} = {xelement.Birth} = {xelement.Death}");
+
+    // var works = xelement.Element("masterpieces")?.Elements("title")?.Select(a => a.Value);
+    // if (works != null) { Console.WriteLine($"{xelement.Element("name")?.Value} = {string.Join(",", works)}"); }
+
+    // var xname = xelement.Element("name");
+    // Console.WriteLine($"{xname} = {xname.Value}");
+
+    // XAttribute xkana = xname.Attribute("kana");
+    // if (xkana != null) { Console.WriteLine($"{xkana.Value} = {xname.Value}"); }
+    // }
+}
+}
+
+class Novelist
+{
+    public string Name { get; set; }
+    public string KanaName { get; set; }
+    public DateTime Birth { get; set; }
+    public DateTime Death { get; set; }
+    public IEnumerable<string> Masterpieces { get; set; }
+}

@@ -1,6 +1,14 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Linq;
+using static System.Net.Mime.MediaTypeNames;
+using System.Xml.Linq;
+using System.Xml;
+using System.Data;
+using System.Diagnostics.Tracing;
 
 namespace SampleConsoleApp
 {
@@ -8,102 +16,58 @@ namespace SampleConsoleApp
     {
         static void Main(string[] args)
         {
-            var fd = new fileEdit();
+            // no1
+            // string fp = "./sports.xml";
+            string nandoku = "./nandoku.xml";
+            var xdoc = XDocument.Load(nandoku);
+            var xmlRootDoc = xdoc.Root.Elements();
 
-            string filepath = @"./sample.txt";
-            string filepath2 = @"./sample.txt";
-            Console.WriteLine(fd.CountClass(filepath));
-
-            /*
-            fd.addPrefix(filepath);
-            fd.MergeTextFiles(filepath, filepath2);
-            fd.FilesBackUp2("./", "./temp");             
-            */
-
-            fd.SearchOver1MB("./");
-
-        }
-
-        class fileEdit
-        {
-
-            public int CountClass(string FilePath)
+            foreach ( var x in xmlRootDoc )
             {
-                using (StreamReader sr = new StreamReader(FilePath))
-                {
-                    string line;
-                    /*
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        if (line.Contains("class"))
-                        {
-                            count++;                            
-                        };
-                    };
-                    var lines = File.ReadAllLines(FilePath);
-                    // var lines2 = lines.Select(a => a.Contains("class"));
-                    var count = lines.Where(a => a.Contains("class")).Count();
-                    var count = File.ReadLines(FilePath).Where(a => a.Contains("class")).Count();
-                    
-                    */
-                    return 1;
-                }
+                x.SetAttributeValue("test", "test2");                
+                Console.WriteLine(x.Value);                
             }
-            // 
-            public void addPrefix(string FilePath)
-            {
-                var outPath = "./outFileAllLines.txt";
-                var lines = File.ReadLines(FilePath);
-                var newLines = lines.Select((a, index) => $"{index + 1}: {a}");
-                // write
-                File.WriteAllLines(outPath, newLines);
-            }
+            // var root = new XElement("difficultkanji",xmlRootDoc.Select(s => new XElement))
+            // var xd = new XDocument(root);
 
-            // 
-            public void MergeTextFiles(string path1, string path2)
-            {
-                var lines = File.ReadAllLines(path2);
-                File.AppendAllLines(path1, lines);
-            }
-
-            // 9-4
-            /*
-            public void FilesBackUp(string dirName,string destDir)
-            {
-                var renameFiles = Directory.GetFiles(dirName).Select(f => f.Replace(".", "_bak."));
-                foreach (var file in renameFiles) { 
-                    File.Copy(file, destDir);
-                }
-            }
-            */
-
-            // 9-4
-            public void FilesBackUp2(string dirName, string destDir)
-            {
-                var renameFiles = Directory.GetFiles(dirName).Select(f => new FileInfo(f));
-
-                if (!Directory.Exists(destDir)) { Directory.CreateDirectory(destDir); }
-
-                foreach (var file in renameFiles)
-                {
-                    var destFilePath = Path.Combine(destDir, file.Name.Replace(".", "_bak."));
-                    File.Copy(file.FullName, destFilePath);
-                }
-            }
-
-            // 9-5
-            public void SearchOver1MB(string rootDir)
-            {
-                var files = Directory.EnumerateFiles(rootDir, searchPattern:"*",searchOption: SearchOption.AllDirectories).Select(f => new FileInfo(f));
-                foreach (var file in files)
-                {
-                    if (file.Length != 1048576) // 1MB in bytes
-                    {
-                        Console.WriteLine(file.FullName);
-                    }
-                }
-            }
-
+            var words = xdoc.Root.Elements().Select(s => new XElement("word",
+                new XAttribute("kanji", s.Element("kanji").Value),
+                new XAttribute("yomi", s.Element("yomi").Value)
+                ));
+            var root = new XElement("difficultkanji", words);
+            root.Save("./newnandoku.xml");
         }
     }
 }
+
+/*
+// foreach (var item in xmlRootDoc) { Console.WriteLine(item.Value); }
+
+// no2
+var x2 = xdoc.Root.Elements().OrderBy(a => (a.Element("firstplayed").Value));
+// foreach (var item in x2) { Console.WriteLine(item.Element("name")); }
+// no3
+var maxTeamMembersSport = xdoc.Root.Elements().OrderByDescending(a => {
+    int.TryParse(a.Element("teammembers")?.Value, out int result);
+    return result;
+}).First();
+
+///// 結合 /////
+var sportName = maxTeamMembersSport.Element("name")?.Value;
+Console.WriteLine($"The sport with the most team members is {sportName}. {maxTeamMembersSport.Element("name")}");
+
+// no4
+// ballsport
+XElement soccer = new XElement("ballsport",
+    new XElement("name", "サッカー"),
+    new XElement("teammembers", 11),
+    new XElement("firstplayed", 1867)
+    );
+
+// soccer.Add(xdoc.Element("ballspots"));
+xdoc.Root.Add(soccer);
+foreach (var item in xmlRootDoc) { Console.WriteLine(item.Value); }
+
+
+*/
+
